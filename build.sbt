@@ -8,6 +8,9 @@ lazy val users = project
 
 lazy val items = project
   .settings(libraryDependencies := Dependencies.catsDependencies)
+  .dependsOn(shared)
+
+lazy val shared = project
 
 lazy val root = (project in file("."))
   .settings(

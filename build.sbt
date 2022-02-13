@@ -4,9 +4,9 @@ ThisBuild / version := "0.1.0-SNAPSHOT"
 
 ThisBuild / scalaVersion := "2.13.8"
 
-lazy val users = project
+lazy val usersManagement = (project in file("users-management"))
 
-lazy val items = project
+lazy val itemsManagement = (project in file("items-management"))
   .settings(libraryDependencies := Dependencies.catsDependencies)
   .dependsOn(shared)
 
@@ -16,4 +16,4 @@ lazy val root = (project in file("."))
   .settings(
     name := "ranker",
   )
-  .aggregate(users, items)
+  .aggregate(usersManagement, itemsManagement)

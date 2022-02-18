@@ -7,10 +7,10 @@ ThisBuild / scalaVersion := "2.13.8"
 lazy val usersManagement = (project in file("users-management"))
 
 lazy val itemsManagement = (project in file("items-management"))
-  .settings(libraryDependencies := Dependencies.catsDependencies)
   .dependsOn(shared)
 
 lazy val shared = project
+  .settings(libraryDependencies ++= Dependencies.catsDependencies)
 
 lazy val root = (project in file("."))
   .settings(

@@ -3,16 +3,17 @@ package com.melvic.ranker.items.algebras
 import cats.free.Free
 import com.melvic.ranker.models.Item
 import ItemService._
+import com.melvic.ranker.implicits._
 
 trait ItemService {
   def getScore(itemId: Item.Id): ItemOperation[Double] =
-    Free.liftF(GetScore(itemId))
+    GetScore(itemId)
 
   def setScore(itemId: Item.Id, score: Double): ItemOperation[Unit] =
-    Free.liftF(SetScore(itemId, score))
+    SetScore(itemId, score)
 
   def addComment(itemId: Item.Id, comment: String): ItemOperation[Unit] =
-    Free.liftF(AddComment(itemId, comment))
+    AddComment(itemId, comment)
 
   def updateScore(itemId: Item.Id, f: Double => Double): ItemOperation[Unit] =
     for {

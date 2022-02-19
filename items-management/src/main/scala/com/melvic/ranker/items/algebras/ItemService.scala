@@ -15,6 +15,9 @@ trait ItemService {
   def addComment(itemId: Item.Id, comment: String): ItemOperation[Unit] =
     AddComment(itemId, comment)
 
+  def addItem(item: Item): ItemOperation[Unit] =
+    AddItem(item)
+
   def updateScore(itemId: Item.Id, f: Double => Double): ItemOperation[Unit] =
     for {
       currentScore <- getScore(itemId)
@@ -34,6 +37,8 @@ object ItemService {
   final case class GetScore(itemId: Item.Id) extends ItemOperationF[Double]
   final case class SetScore(itemId: Item.Id, score: Double) extends ItemOperationF[Unit]
   final case class AddComment(itemId: Item.Id, comment: String) extends ItemOperationF[Unit]
+  final case class AddItem(item: Item) extends ItemOperationF[Unit]
+  case object ListItems extends ItemOperationF[List[Item]]
 
   type ItemOperation[A] = Free[ItemOperationF, A]
 }

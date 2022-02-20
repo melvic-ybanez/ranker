@@ -4,20 +4,25 @@ import cats.free.Free
 import com.melvic.ranker.items.repositories.IteRepository._
 import com.melvic.ranker.models.Item
 import com.melvic.ranker.implicits._
+import com.melvic.ranker.utils.Page
 
 trait ItemRepository {
-  def getItem(itemId: Item.Id): ItemRepoOperation[Item] =
+  def getItem(itemId: Item.Id): ItemRepoAction[Item] =
     GetItem(itemId)
 
-  def saveItem(item: Item): ItemRepoOperation[Unit] =
+  def saveItem(item: Item): ItemRepoAction[Unit] =
     SaveItem(item)
+
+  def listItems(predicate: Item => Boolean, page: Page): ItemRepoAction[List[Item]] =
+    ListItems(predicate, page)
 }
 
 object IteRepository {
-  sealed trait ItemRepoOperationF[A]
+  sealed trait ItemRepoActionF[A]
 
-  final case class GetItem(itemId: Item.Id) extends ItemRepoOperationF[Item]
-  final case class SaveItem(item: Item) extends ItemRepoOperationF[Unit]
+  final case class GetItem(itemId: Item.Id) extends ItemRepoActionF[Item]
+  final case class SaveItem(item: Item) extends ItemRepoActionF[Unit]
+  final case class ListItems(predicate: Item => Boolean, page: Page) extends ItemRepoActionF[List[Item]]
 
-  type ItemRepoOperation[A] = Free[ItemRepoOperationF, A]
+  type ItemRepoAction[A] = Free[ItemRepoActionF, A]
 }

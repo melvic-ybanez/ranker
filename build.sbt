@@ -1,3 +1,5 @@
+import Dependencies._
+
 ThisBuild / organization := "com.melvic"
 
 ThisBuild / version := "0.1.0-SNAPSHOT"
@@ -10,7 +12,9 @@ lazy val itemsManagement = (project in file("items-management"))
   .dependsOn(shared)
 
 lazy val shared = project
-  .settings(libraryDependencies ++= Dependencies.catsDependencies)
+  .settings(
+    libraryDependencies ++= catsDependencies ++ refinedDependencies,
+  )
 
 lazy val root = (project in file("."))
   .settings(

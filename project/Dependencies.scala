@@ -7,4 +7,8 @@ object Dependencies {
     "org.typelevel" %% "cats-core" % catsVersion,
     "org.typelevel" %% "cats-free" % catsVersion,
   )
+
+  lazy val refinedDependencies = Seq(
+    "eu.timepit" %% "refined" % "0.9.28"
+  )
 }

@@ -5,5 +5,4 @@ import eu.timepit.refined.numeric.Positive
 
 object Types {
   type UInt = Int Refined Positive
-  type
 }

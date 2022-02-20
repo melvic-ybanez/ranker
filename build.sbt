@@ -11,6 +11,9 @@ lazy val usersManagement = (project in file("users-management"))
 lazy val itemsManagement = (project in file("items-management"))
   .dependsOn(shared)
 
+lazy val topicsManagement = (project in file("topics-management"))
+  .dependsOn(shared)
+
 lazy val shared = project
   .settings(
     libraryDependencies ++= catsDependencies ++ refinedDependencies,
@@ -20,4 +23,4 @@ lazy val root = (project in file("."))
   .settings(
     name := "ranker",
   )
-  .aggregate(usersManagement, itemsManagement)
+  .aggregate(shared, usersManagement, itemsManagement, topicsManagement)

@@ -1,5 +1,6 @@
 package com.melvic.ranker.items;
 
+import com.melvic.ranker.topics.Topic;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -8,6 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,6 +25,9 @@ public class Item {
 
     @UpdateTimestamp
     private LocalDateTime lastModified;
+
+    @ManyToOne
+    private Topic topic;
 
     public String getId() {
         return id;
@@ -62,5 +67,13 @@ public class Item {
 
     public void setLastModified(LocalDateTime lastModified) {
         this.lastModified = lastModified;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 }

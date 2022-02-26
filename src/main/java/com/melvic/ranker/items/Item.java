@@ -1,7 +1,14 @@
 package com.melvic.ranker.items;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Entity
 public class Item {
@@ -10,15 +17,12 @@ public class Item {
     private String name;
     private String description;
 
-    public Item(String id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
+    @Column(updatable = false)
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
-    public Item() {
-
-    }
+    @UpdateTimestamp
+    private LocalDateTime lastModified;
 
     public String getId() {
         return id;
@@ -42,5 +46,21 @@ public class Item {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(LocalDateTime lastModified) {
+        this.lastModified = lastModified;
     }
 }
